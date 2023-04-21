@@ -1,0 +1,12 @@
+POSTGRES_USER = "postgres"
+POSTGRES_PASSWORD = 123456
+HOST = "postgres"
+PORT = 5432
+DATABASE = "python_task"
+STUDENTS_TABLE = "students"
+ROOMS_TABLE = "rooms"
+
+
+connection_uri = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}/{DATABASE}"
+
+DB_TABLES_NAMES = [ROOMS_TABLE, STUDENTS_TABLE]
