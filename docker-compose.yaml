@@ -4,12 +4,13 @@ services:
   postgres:
     image: postgres:15
     container_name: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: python_task
     volumes:
+      - ./create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
       - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_MULTIPLE_DATABASES=python_task,test
     restart: always
 
   app:
@@ -22,6 +23,7 @@ services:
       - postgres
     stdin_open: true
     tty: true
+    command: bash -c "echo 'Entering container'; bash"
 
 volumes:
   postgres:

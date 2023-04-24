@@ -3,17 +3,17 @@ import json
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-from classes.DB.db_conf import connection_uri
 from classes.logger.logger_init import logger
 from classes.sql_queries.manage_tables_queries import *
 
 
 class Database:
-    def __init__(self):
+    def __init__(self, connection_uri):
         self.connection_pd = None
+        self.connection_uri = connection_uri
 
     def connect(self):
-        db = create_engine(connection_uri)
+        db = create_engine(self.connection_uri)
         try:
             self.connection_pd = db.connect()
             logger.info("Database connection successful.")

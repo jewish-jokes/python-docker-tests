@@ -3,7 +3,7 @@ import json
 import click
 
 from classes.DB.db import Database
-from classes.DB.db_conf import DB_TABLES_NAMES
+from classes.DB.db_conf import DB_TABLES_NAMES, connection_uri
 from classes.sql_queries.retrieve_data_queries import retrieve_data_queries
 
 FORMATS = ["xml", "json"]
@@ -18,7 +18,7 @@ def commands():
 @click.argument("students", type=click.Path(exists=True), default="./data/raw/students.json")
 @click.argument("rooms", type=click.Path(exists=True), default="./data/raw/rooms.json")
 def load(students, rooms):
-    database = Database()
+    database = Database(connection_uri)
     database.connect()
     if not database.check_if_tables_exist(DB_TABLES_NAMES):
         database.create_tables()
@@ -39,7 +39,7 @@ def load(students, rooms):
 @click.command()
 @click.argument("format", type=click.Choice(FORMATS), default="json")
 def execute_queries(format):
-    database = Database()
+    database = Database(connection_uri)
     database.connect()
     counter = 1
     if format == "json":
