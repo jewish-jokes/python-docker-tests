@@ -1,4 +1,5 @@
 import json
+import os
 
 import click
 
@@ -45,14 +46,26 @@ def execute_queries(format):
     if format == "json":
         for query in retrieve_data_queries:
             data_json = database.get_data_json(query)
-            with open(f"./data/output/query_{counter}.json", "w", encoding="utf-8") as file:
-                json.dump(data_json, file, indent="")
+            filename = f"./data/output/query_{counter}.json"
+            try:
+                with open(filename, "w", encoding="utf-8") as file:
+                    json.dump(data_json, file, indent="")
+            except FileNotFoundError:
+                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                with open(filename, "w", encoding="utf-8") as file:
+                    json.dump(data_json, file, indent="")
             counter += 1
     else:
         for query in retrieve_data_queries:
             data_xml = database.get_data_xml(query)
-            with open(f"./data/output/query_{counter}.xml", "w", encoding="utf-8") as file:
-                file.write(data_xml)
+            filename = f"./data/output/query_{counter}.xml"
+            try:
+                with open(filename, "w", encoding="utf-8") as file:
+                    json.dump(data_xml, file, indent="")
+            except FileNotFoundError:
+                os.makedirs(os.path.dirname(filename), exist_ok=True)
+                with open(filename, "w", encoding="utf-8") as file:
+                    json.dump(data_xml, file, indent="")
             counter += 1
     database.close()
 
