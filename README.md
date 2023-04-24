@@ -18,7 +18,7 @@ docker-compose up -d --build
 To enter the app container
 
 ```bash
-docker exec -it task-1-app-1 bash
+docker exec -it app bash
 ```
 
 ## Usage
