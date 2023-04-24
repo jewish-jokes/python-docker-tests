@@ -9,13 +9,21 @@ Given program uses cli commands to create 2 databases, load data into those tabl
 
 ## Installation
 
-Download the source code from the repository and run following command:
+Download the source code from the repository and run following commands:
+
+For some reason create-multiple-postgresql-databases.sh gets messed up after git pull, that fixes it:
+
+```bash
+sed -i -e 's/\r$//' create-multiple-postgresql-databases.sh
+```
+
+Start database and app containers:
 
 ```bash
 docker-compose up -d --build
 ```
 
-To enter the app container
+Enter the app container:
 
 ```bash
 docker exec -it app bash
