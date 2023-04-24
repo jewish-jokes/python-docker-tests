@@ -15,6 +15,7 @@ services:
 
   app:
     build: .
+    container_name: app
     restart: always
     volumes:
       - .:/home/python/app
