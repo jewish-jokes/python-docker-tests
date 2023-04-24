@@ -15,7 +15,15 @@ Download the source code from the repository and run following command:
 docker-compose up -d --build
 ```
 
+To enter the app container
+
+```bash
+docker exec -it task-1-app-1 bash
+```
+
 ## Usage
+
+All the following commands should be executed inside the container
 
 ```bash
 # loads json files into database
